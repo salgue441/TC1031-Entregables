@@ -25,7 +25,11 @@ void write_data(const std::fstream &output_file);
 
 template <typename T>
 int timing_algorithms(std::vector<T> &,
-					  T (*func)(std::vector<T> &));
+					  T (*sort_func)(std::vector<T> &));
+
+template <typename T>
+int timing_algorithms(T (*sort_func)(std::vector<T> &),
+					  std::vector<T> &);
 
 int main(int argc, char **argv)
 {
@@ -65,14 +69,12 @@ int main(int argc, char **argv)
 	// ordenando el vector
 	steps_bubble = timing_algorithms(data_vec, &bubbleSort);
 	steps_selection = timing_algorithms(data_vec, &selectionSort);
-	steps_insertion = timing_algorithms(data_vec, &insertionSort);
+	steps_insertion = timing_algorithms(&insertionSort, data_vec);
 
 	output_file << steps_bubble << " "
 				<< steps_selection << " "
 				<< steps_insertion << std::endl
 				<< std::endl;
-
-	bubbleSort(data_vec);
 
 	// filtrando por los datos
 	input_file >> num_busqueda;
@@ -126,5 +128,23 @@ int timing_algorithms(std::vector<T> &data_vec,
 
 	copy_vec.clear();
 
+	return steps;
+}
+
+/**
+ * @brief
+ * Se encarga de contar los pasos que toma cada algoritmo en ordenar
+ * los datos. La unica diferencia con la otra implementacion, es que
+ * esta ordena el vector original.
+ * @tparam T                Usado para el tipo de dato del vector.
+ * @param sort_func         Algoritmo a utilizar.
+ * @param data_vec          Vector con los datos.
+ * @return int              Tiempo tomado con el algoritmo
+ */
+template <typename T>
+int timing_algorithms(T (*sort_func)(std::vector<T> &),
+					  std::vector<T> &data_vec)
+{
+	int steps = sort_func(data_vec);
 	return steps;
 }
