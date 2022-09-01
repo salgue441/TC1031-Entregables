@@ -43,17 +43,18 @@ int main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		std::cout << "Uso: " << argv[0] << "input.txt output.txt";
+		std::cout << "Error: Numero de argumentos ingresados mayor al requerido."
+				  << argv[0] << "\nArgumentos: ejecutable input.txt output.txt";
 		return -1;
 	}
 	else if (input_file.fail())
 	{
-		std::cout << "No se pudo abrir el archivo";
+		std::cout << "Error: problema al leer el archivo de entrada. ";
 		return -1;
 	}
 	else if (output_file.fail())
 	{
-		std::cout << "No se pudo abrir el archivo";
+		std::cout << "Error: problema al crear el archivo de salida. ";
 		return -1;
 	}
 
