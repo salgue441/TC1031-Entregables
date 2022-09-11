@@ -14451,40 +14451,45 @@ namespace TestCaseTracking {
         m_runState = Executing;
         moveToThis();
         if( m_parent )
-            m_parent->openChild();
+            m_parent->o#include <iostream>
+
+int binary_search(int[], int, int, int);
+
+int main()
+{
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+        size = sizeof(arr) / sizeof(arr[0]);
+
+
+    std::cout << "Elementos del arreglo: ";
+    for (const auto &elem : arr)
+        std::cout << elem << " ";
+
+    std::cout << std::endl;
+
+    (binary_search(arr, 0, size - 1, 9) == -1)
+        ? std::cout << "Elemento no encontrado. " << std::endl
+        : std::cout << "Elemento encontrado en "
+                    << binary_search(arr, 0, size - 1, 9) << std::endl;
+}
+
+int binary_search(int arr[], int min, int max, int dato)
+{
+    if (max >= min)
+    {
+        int mid = min + (max - min) / 2;
+
+        if (arr[mid] == dato)
+            return mid;
+        else if (arr[mid] > dato)
+            return binary_search(arr, min, mid - 1, dato);
+        else
+            return binary_search(arr, mid + 1, max, dato);
     }
 
-    void TrackerBase::close() {
-
-        // Close any still open children (e.g. generators)
-        while( &m_ctx.currentTracker() != this )
-            m_ctx.currentTracker().close();
-
-        switch( m_runState ) {
-            case NeedsAnotherRun:
-                break;
-
-            case Executing:
-                m_runState = CompletedSuccessfully;
-                break;
-            case ExecutingChildren:
-                if( std::all_of(m_children.begin(), m_children.end(), [](ITrackerPtr const& t){ return t->isComplete(); }) )
-                    m_runState = CompletedSuccessfully;
-                break;
-
-            case NotStarted:
-            case CompletedSuccessfully:
-            case Failed:
-                CATCH_INTERNAL_ERROR( "Illogical state: " << m_runState );
-
-            default:
-                CATCH_INTERNAL_ERROR( "Unknown state: " << m_runState );
-        }
-        moveToParent();
-        m_ctx.completeCycle();
-    }
-    void TrackerBase::fail() {
-        m_runState = Failed;
+    return -1;
+}
+                                                                                                    Failed;
         if( m_parent )
             m_parent->markAsNeedingAnotherRun();
         moveToParent();

@@ -1,6 +1,7 @@
 /**
  * @file sort.h
  * @author Carlos Salguero
+ * @author Daniel Hurtadoj
  * @brief Sort file of the program
  * @version 0.1
  * @date 2022-09-07

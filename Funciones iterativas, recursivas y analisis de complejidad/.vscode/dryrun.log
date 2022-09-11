@@ -1,6 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/mnt/d/Documents/Tec de Monterrey/Semestres/2022/Agosto - Diciembre/TC1031 - Estructura de Datos & Algoritmos fundamentales/Tareas/Funciones iterativas, recursivas y analisis de complejidad'
-rm runTest1
-g++ -std=c++11 test1.cpp -o runTest1
-make: Leaving directory '/mnt/d/Documents/Tec de Monterrey/Semestres/2022/Agosto - Diciembre/TC1031 - Estructura de Datos & Algoritmos fundamentales/Tareas/Funciones iterativas, recursivas y analisis de complejidad'
- 

@@ -7,6 +7,7 @@ En este repositorio encontrarás los archivos de entrada, así como las salidas 
 // =========================================================
 // File: main.cpp
 // Author: Carlos Salguero - A00833341
+// Author: Daniel Hurtado - A01707774
 // Date: 11/09/2022
 // =========================================================
 ```
