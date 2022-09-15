@@ -1,8 +1,9 @@
-#include <iostream>
+all: clean runTest1
 
-int binary_search(int[], int, int, int);
-int binary_search_a(int[], int, int, int);
+runTest1:
+	g++ -std=c++11 test1.cpp -o runTest1
 
-int main()
-{
-    int arr[
+clean:
+ifneq ("$(wildcard ./runTest1)","")
+	rm runTest1
+endif
