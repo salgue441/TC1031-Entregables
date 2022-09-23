@@ -6,8 +6,8 @@ En este repositorio encontrarás el archivo "list.h" que deberás modificar para
 ```
 // =========================================================
 // File: list.h
-// Author: Edward Elric - A00123456
-// Date: 01/01/2021
+// Author: Carlos Salguero
+// Date: 23/09/2022
 // =========================================================
 ```
 
