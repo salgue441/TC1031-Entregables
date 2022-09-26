@@ -1,8 +1,8 @@
 // =================================================================
 //
 // File: list.h
-// Author:
-// Date:
+// Author: Carlos Salguero
+// Date: Domingo 25, septiembre 2022
 //
 // =================================================================
 #ifndef LIST_H
@@ -242,6 +242,7 @@ T List<T>::last() const
 // =================================================================
 // Returns the element that is in the position indicated by index.
 //
+// @complexity O(n)
 // @returns the element in index
 // @throws IndexOutOfBounds, if index >= size.
 // =================================================================
@@ -314,6 +315,7 @@ void List<T>::push_back(T val)
 // Add an element in index (0 <= index <= size). The element that
 // was in that position is shifted to the right.
 //
+// @complexity O(n)
 // @throws IndexOutOfBounds, if index > size.
 // =================================================================
 template <class T>
@@ -417,6 +419,7 @@ T List<T>::pop_back()
 // =================================================================
 // Delete the element found in index (0 <= index <size).
 //
+// @complexity O(n)
 // @returns the element that was in index.
 // @throws IndexOutOfBounds, if index >= size.
 // =================================================================
@@ -424,50 +427,49 @@ template <class T>
 T List<T>::remove_at(uint index)
 {
 	T aux;
-	Node<T> *temp_node = head, *prev_node;
+	Node<T> *temp_node = head;
 
-	if (index >= size)
+	if (index < 0 || index >= size)
 		throw IndexOutOfBounds();
 
 	// eliminando el primer nodo
-	if (index == 0)
+	else if (index == 0)
 	{
+		// moviendo al siguiente apuntador
 		head = head->next;
-		delete (temp_node);
+		--size;
+
+		return temp_node->value;
 	}
 
-	// iterando en los nodos
-	while (--index)
-	{
-		prev_node = temp_node;
+	for (size_t i{}; i < index - 1 && temp_node != nullptr; ++i)
 		temp_node = temp_node->next;
-	}
 
-	// eliminando el nodo deseado
-	prev_node->next = temp_node->next;
-	delete (temp_node);
+	Node<T> *new_node = temp_node->next;
+	temp_node->next = new_node->next;
 
-	return aux;
+	--size;
+
+	return new_node->value;
 }
 
 // =================================================================
 // Returns the position of an item in the list.
 //
+// @complexity O(n)
 // @returns the position of an item in the list, -1 otherwise.
 // =================================================================
 template <class T>
 long int List<T>::indexOf(T val) const
 {
-	int count{};
 	Node<T> *temp_node = head;
 
-	while (temp_node != nullptr)
+	for (size_t i{}; i < size && temp_node != nullptr; ++i)
 	{
 		if (temp_node->value == val)
-			return count;
+			return i;
 
 		temp_node = temp_node->next;
-		++count;
 	}
 
 	return -1;
