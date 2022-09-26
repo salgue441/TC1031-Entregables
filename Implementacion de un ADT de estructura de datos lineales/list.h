@@ -242,7 +242,7 @@ T List<T>::last() const
 // =================================================================
 // Returns the element that is in the position indicated by index.
 //
-// @complexity O(n)
+// @complexity O(n log(n))
 // @returns the element in index
 // @throws IndexOutOfBounds, if index >= size.
 // =================================================================
@@ -259,7 +259,6 @@ T List<T>::get(uint index) const
 	while (current != nullptr)
 	{
 		if (count == index)
-			// return (current->value);
 			aux = current->value;
 
 		++count;
