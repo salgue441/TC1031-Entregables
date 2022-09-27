@@ -243,31 +243,25 @@ T List<T>::last() const
 // =================================================================
 // Returns the element that is in the position indicated by index.
 //
-// @complexity O(n log(n))
+// @complexity O(n)
 // @returns the element in index
 // @throws IndexOutOfBounds, if index >= size.
 // =================================================================
 template <class T>
 T List<T>::get(uint index) const
 {
-	T aux{};
 	Node<T> *current = head;
 	int count{};
 
 	if (index >= size)
 		throw IndexOutOfBounds();
 
-	while (current != nullptr)
-	{
-		if (count == index)
-			aux = current->value;
-
-		++count;
+	for (size_t i{}; i < index; ++i)
 		current = current->next;
-	}
 
-	return aux;
+	return current->value;
 }
+
 
 // =================================================================
 // Add an item to the beginning of the list. Increase the size of
@@ -282,7 +276,7 @@ void List<T>::push_front(T val)
 	q->next = head;
 	head = q;
 	size++;
-}
+	}
 
 // =================================================================
 // Add an item to the end of the list. Increase the size of
@@ -321,25 +315,20 @@ void List<T>::push_back(T val)
 template <class T>
 void List<T>::insert_at(T val, uint index)
 {
-	Node<T> *temp_node = new Node<T>(val),
-			*new_node = head;
-
-	temp_node->value = val;
-	temp_node->next = nullptr;
 
 	if (index < 0 || index > size)
 		throw IndexOutOfBounds();
 
-	// insertando en la posicion 0
-	else if (index == 0)
-	{
-		temp_node->next = head;
-		head = temp_node;
-		++size;
-		return;
-	}
+	Node<T> *temp_node = new Node<T>(val),
+			*new_node = head;
 
-	// insertando en cualquier posicion
+	temp_node->next = nullptr;
+
+	// insertando en la posicion 0
+	if (index == 0)
+		return push_front(val);
+
+		// insertando en cualquier posicion
 	for (size_t i{}; i < index - 1; ++i)
 		new_node = new_node->next;
 
@@ -426,31 +415,26 @@ T List<T>::pop_back()
 template <class T>
 T List<T>::remove_at(uint index)
 {
-	T aux;
-	Node<T> *temp_node = head;
 
 	if (index < 0 || index >= size)
 		throw IndexOutOfBounds();
 
-	// eliminando el primer nodo
-	else if (index == 0)
-	{
-		// moviendo al siguiente apuntador
-		head = head->next;
-		--size;
+	T aux;
+	Node<T> *temp_node = head;
 
-		return temp_node->value;
-	}
+	// eliminando el primer nodo
+	if (index == 0)
+		return pop_front();
 
 	for (size_t i{}; i < index - 1 && temp_node != nullptr; ++i)
 		temp_node = temp_node->next;
 
-	Node<T> *new_node = temp_node->next;
-	temp_node->next = new_node->next;
+	Node<T> *next_node = temp_node->next;
+	temp_node->next = next_node->next;
 
 	--size;
 
-	return new_node->value;
+	return next_node->value;
 }
 
 // =================================================================
