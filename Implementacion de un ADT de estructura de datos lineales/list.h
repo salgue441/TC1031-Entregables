@@ -149,6 +149,7 @@ bool List<T>::contains(T val) const
 
 		p = p->next;
 	}
+
 	return false;
 }
 
