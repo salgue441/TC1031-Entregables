@@ -275,7 +275,7 @@ T DoubleLinkedList<T>::after(T val) const
 {
 	Node<T> *temp_node = head;
 
-	while (temp_node->next != nullptr)
+	for (size_t pos{}; pos < size && temp_node->next != nullptr; ++pos)
 	{
 		if (temp_node->value == val)
 			return temp_node->next->value;
