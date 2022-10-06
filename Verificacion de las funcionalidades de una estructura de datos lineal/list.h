@@ -245,6 +245,7 @@ T DoubleLinkedList<T>::last() const
 // Returns the value before the first occurrence if certain value.
 //
 // @throws NoSuchelement, if val is not on the list.
+// @complexity O(n), n depends on linked list size.
 // =================================================================
 template <class T>
 T DoubleLinkedList<T>::before(T val) const
@@ -269,6 +270,7 @@ T DoubleLinkedList<T>::before(T val) const
 // Returns the value after the first occurrence of certain value.
 //
 // @throws NoSuchelement, if val is not on the list.
+// @complexity O(n), n depends on linked list size.
 // =================================================================
 template <class T>
 T DoubleLinkedList<T>::after(T val) const
@@ -347,6 +349,7 @@ void DoubleLinkedList<T>::push_back(T val)
 // Insert an element before the first occurrence of a certain value.
 //
 // @throws NoSuchelement, if lookingFor is not on the list.
+// @complexity O(n), n depends on linked list size.
 // =================================================================
 template <class T>
 void DoubleLinkedList<T>::insert_before(T lookingFor, T newVal)
@@ -379,6 +382,7 @@ void DoubleLinkedList<T>::insert_before(T lookingFor, T newVal)
 // Insert an element after the first occurrence of a certain value.
 //
 // @throws NoSuchelement, if lookingFor is not on the list.
+// @complexity O(n), n depends on linked list size.
 // =================================================================
 template <class T>
 void DoubleLinkedList<T>::insert_after(T lookingFor, T newVal)
