@@ -13,7 +13,7 @@
 // Constructor
 /**
  * @brief
- * Copies another Heap< T>:: Heap object into current object.
+ * Copies Heap< T>:: Heap object into current object.
  * @tparam T              Class allowed data types.
  * @param other           Other heap structure to be copied.
  */
