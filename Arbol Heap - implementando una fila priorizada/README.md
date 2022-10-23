@@ -77,7 +77,7 @@ Nada
 
 <tr style="">
 <td style="background-color: rgb(0, 139, 247);"><span style="color: rgb(0, 0, 0);">Precondición</span></td>
-<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);">n Que la fila priorizada contenga al menos 1 dato.
+<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);"> Que la fila priorizada contenga al menos 1 dato.
 </span></td>
 </tr>
 
@@ -115,7 +115,7 @@ Nada
 
 <tr style="">
 <td style="background-color: rgb(0, 139, 247);"><span style="color: rgb(0, 0, 0);">Precondición</span></td>
-<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);">n Que la fila priorizada contenga al menos 1 dato.
+<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);"> Que la fila priorizada contenga al menos 1 dato.
 </span></td>
 
 </tr>
@@ -154,7 +154,7 @@ Nada
 
 <tr style="">
 <td style="background-color: rgb(0, 139, 247);"><span style="color: rgb(0, 0, 0);">Precondición</span></td>
-<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);">n Nada
+<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);"> Nada
 </span></td>
 </tr>
 
@@ -192,7 +192,7 @@ Nada
 
 <tr style="">
 <td style="background-color: rgb(0, 139, 247);"><span style="color: rgb(0, 0, 0);">Precondición</span></td>
-<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);">n Nada
+<td style="background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);"> Nada
 </span></td>
 </tr>
 
