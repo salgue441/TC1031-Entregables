@@ -27,6 +27,7 @@ Heap<T>::Heap(const Heap<T> &other) : elements(other.elements){};
  * @tparam T             Class allowed data types.
  * @param position       Index of the child element.
  * @return unsigned int, index of the parent.
+ * @complexity           O(1)
  */
 template <class T>
 unsigned int Heap<T>::get_parent(unsigned int position) const
@@ -40,6 +41,7 @@ unsigned int Heap<T>::get_parent(unsigned int position) const
  * @tparam T             Class allowed data types.
  * @param position       Index of the element.
  * @return unsigned int, Index of the left child.
+ * @complexity           O(1)
  */
 template <class T>
 unsigned int Heap<T>::get_left_leaf(unsigned int position) const
@@ -53,6 +55,7 @@ unsigned int Heap<T>::get_left_leaf(unsigned int position) const
  * @tparam T             Class allowed data types.
  * @param position       Index of the element.
  * @return unsigned int, Index of the right child.
+ * @complexity           O(1)
  */
 template <class T>
 unsigned int Heap<T>::get_right_leaf(unsigned int position) const
@@ -94,6 +97,7 @@ T Heap<T>::get_top() const
  * @tparam T            Class allowed data types.
  * @param first         First index to be swapped.
  * @param second        Second index to be swapped.
+ * @complexity           O(1)
  */
 template <class T>
 void Heap<T>::swap(unsigned int first, unsigned int second)
@@ -109,7 +113,7 @@ void Heap<T>::swap(unsigned int first, unsigned int second)
  * must be greater than its children. If not, recursively perform the push_up.
  * @tparam T            Class allowed data types.
  * @param position      The current position of the item being inserted.
- * @complexity          O(1)
+ * @complexity          O(log(n))
  */
 template <class T>
 void Heap<T>::push_up(unsigned int position)
@@ -155,7 +159,7 @@ bool Heap<T>::is_empty() const
  * father element. If the condition is true, the values are exchanged.
  * @tparam T         Class allowed data types.
  * @param value      Value to be inserted in the heap structure.
- * @complexity       O(n)
+ * @complexity       O(log(n))
  */
 template <class T>
 void Heap<T>::push(T value)
@@ -174,7 +178,7 @@ void Heap<T>::push(T value)
  * @brief
  * Pops the most significant element from the heap structure.
  * @tparam T     Class allowed data types.
- * @complexity   O(1)
+ * @complexity   O(log(n))
  */
 template <class T>
 void Heap<T>::pop()
@@ -192,6 +196,7 @@ void Heap<T>::pop()
  * Auxiliary function. Shows the elements from the heap structure as strings.
  * @tparam T           Class allowed data types.
  * @return stream with all the values shown as strings.
+ * @complexity          O(n)
  */
 template <class T>
 std::string Heap<T>::heap_elements() const
