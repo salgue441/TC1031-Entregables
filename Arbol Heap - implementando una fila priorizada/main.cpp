@@ -34,7 +34,7 @@ int main()
     std::cout << "Size: " << heap_structure.get_size() << std::endl;
     std::cout << "Top value: " << heap_structure.get_top() << std::endl;
 
-    // showing pop functionality
+    // showing pop() functionality
     heap_structure.pop();
     heap_structure.pop();
 
