@@ -18,8 +18,7 @@ ista de Adjacencia.
 <tr style="height: 24px;">
 <td style="width: 0px; height: 0px; background-color: rgb(0, 139, 247);">Entrada</td>
 <td style="width: 0px; height: 0px; background-color: rgb(183, 219, 255);">
-Dos enteros positivos: n (Cantidad de vertices) y m (Cantidad de Arcos). La 
-Matriz de Adjacencia (parametro por ref) y la Lista de Adjacencia (parametro por ref).
+El archivo de datos de entrada por referencia. 
 </td>
 </tr>
 <tr style="height: 24px;">
@@ -28,7 +27,7 @@ Matriz de Adjacencia (parametro por ref) y la Lista de Adjacencia (parametro por
 </tr>
 <tr style="height: 24px;">
 <td style="width: 0px; height: 0px; background-color: rgb(0, 139, 247);"><span style="color: rgb(0, 0, 0);">Precondición</span></td>
-<td style="width: 0px; height: 0px; background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);">n y m son enteros positivos.</span></td>
+<td style="width: 0px; height: 0px; background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);">nada</span></td>
 </tr>
 <tr style="height: 24px;">
 <td style="width: 0px; height: 10px; background-color: rgb(0, 139, 247);"><span style="color: rgb(0, 0, 0);">Postcondición</span></td>
@@ -98,4 +97,4 @@ correctamente cargado en la lista de adjacencia. </span></td>
 <td style="width: 0px; height: 10px; background-color: rgb(183, 219, 255);"><span style="color: rgb(0, 0, 0);">Nada</span></td>
 </tr>
 </tbody>
-</table>>
+</table>
