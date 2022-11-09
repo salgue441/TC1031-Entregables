@@ -1,28 +1,40 @@
 /**
  * @file main.cpp
  * @author Carlos Salguero
- * @brief Main file of the program
+ * @brief Main file
  * @version 0.1
- * @date 2022-11-04
+ * @date 2022-11-09
  *
  * @copyright Copyright (c) 2022
  *
  */
+
 #include <iostream>
+#include <fstream>
+#include <memory>
 
 #include "UMatrix_graph.cpp"
 
 int main()
 {
-    UMatrix_graph<int> graph(5);
+    std::fstream input_file("graph.txt", std::ios::in);
 
-    graph.add_edge(0, 1);
-    graph.add_edge(0, 2);
-    graph.add_edge(1, 2);
-    graph.add_edge(2, 0);
-    graph.add_edge(2, 3);
-    graph.add_edge(3, 3);
-    graph.add_edge(4, 4);
+    if (!input_file)
+    {
+        std::cout << "Error opening file" << std::endl;
+        return 1;
+    }
 
-    std::cout << graph;
+    int first_line;
+    input_file >> first_line;
+
+    std::shared_ptr<UMatrix_graph<int>> graph =
+        std::make_shared<UMatrix_graph<int>>(first_line);
+
+    graph->load_graph(first_line, input_file);
+
+    graph->dfs(1);
+    graph->bfs(1);
+
+    std::cout << graph << std::endl;
 }

@@ -1,27 +1,28 @@
 /**
  * @file UMatrix_graph.cpp
  * @author Carlos Salguero
- * @brief Implementation of Unweighted Matrix Graph class
+ * @brief Implementation of Unweighted Matrix Graph
  * @version 0.1
- * @date 2022-11-04
+ * @date 2022-11-09
  *
  * @copyright Copyright (c) 2022
  *
  */
+
 #include "UMatrix_graph.h"
 
 // Constructors
 /**
  * @brief
- * Construct a new umatrix graph<vertex>::umatrix graph object
- * @tparam Vertex Type of vertex
- * @param c_size Size of the graph
- * @param o_direction Direction of the graph
+ * Construct a new matrix graph<vertex>::umatrix graph object
+ * @tparam Type of vertex
+ * @param c_size size of the graph
+ * @param c_direction direction of the graph
  */
 template <class Vertex>
-UMatrix_graph<Vertex>::UMatrix_graph(int c_size,
-                                     std::optional<bool> o_direction)
-    : size(c_size), direction(o_direction.value_or(true))
+UMatrix_graph<Vertex>::UMatrix_graph(unsigned int c_size,
+                                     std::optional<bool> c_direction)
+    : size(c_size), direction(c_direction.value_or(true))
 {
     next = 0;
     vertexes.resize(size);
@@ -37,9 +38,10 @@ UMatrix_graph<Vertex>::UMatrix_graph(int c_size,
 // Access Methods
 /**
  * @brief
- * Gets the next object.
- * @tparam Vertex Type of the vertex.
- * @return int, the next vertex.
+ * Get the next vertex
+ * @tparam Vertex Type of vertex
+ * @return Vertex next vertex
+ * @complexity O(1)
  */
 template <class Vertex>
 int UMatrix_graph<Vertex>::get_next() const
@@ -49,22 +51,23 @@ int UMatrix_graph<Vertex>::get_next() const
 
 /**
  * @brief
- * Gets the size of the object.
- * @tparam Vertex Type of the vertex.
- * @return int, the size of the graph.
+ * Get the size of the graph
+ * @tparam Vertex Type of vertex
+ * @return Vertex size
+ * @complexity O(1)
  */
 template <class Vertex>
-int UMatrix_graph<Vertex>::get_size() const
+unsigned int UMatrix_graph<Vertex>::get_size() const
 {
     return size;
 }
 
 /**
  * @brief
- * Gets the direction of the object.
- * @tparam Vertex Type of the vertex.
- * @return true, if the graph is directed.
- * @return false, if the graph is undirected.
+ * Get the direction of the graph
+ * @tparam Vertex Type of vertex
+ * @return Vertex direction
+ * @complexity O(1)
  */
 template <class Vertex>
 bool UMatrix_graph<Vertex>::get_direction() const
@@ -74,10 +77,10 @@ bool UMatrix_graph<Vertex>::get_direction() const
 
 /**
  * @brief
- * Gets the vertexes of the graph.
- * @tparam Vertex Type of the vertex.
- * @return std::vector<Vertex>, the vertexes of the graph.
- * @complexity O(n)
+ * Get the vertexes of the graph
+ * @tparam Vertex Type of vertex
+ * @return Vertex vertexes
+ * @complexity O(1)
  */
 template <class Vertex>
 std::vector<Vertex> UMatrix_graph<Vertex>::get_vertexes() const
@@ -87,21 +90,20 @@ std::vector<Vertex> UMatrix_graph<Vertex>::get_vertexes() const
 
 /**
  * @brief
- * Gets the neighbours of a vertex.
- * @tparam Vertex Type of the vertex.
- * @param vertex Vertex to get the neighbours.
- * @return std::set<Vertex>, the neighbours of the vertex.
+ * Get the neighbours of a vertex
+ * @tparam Vertex Type of vertex
+ * @param vertex vertex to get the neighbours
+ * @return Vertex neighbours
  * @complexity O(n)
  */
 template <class Vertex>
 std::set<Vertex> UMatrix_graph<Vertex>::get_neighbours(Vertex vertex) const
 {
     std::set<Vertex> neighbours;
-    int index = index_of(vertex);
 
-    for (size_t elem{}; elem < get_next(); ++elem)
-        if (index != elem && edges[index][elem])
-            neighbours.insert(vertexes[elem]);
+    for (size_t i{}; i < size; ++i)
+        if (edges[vertex][i])
+            neighbours.insert(i);
 
     return neighbours;
 }
@@ -109,31 +111,48 @@ std::set<Vertex> UMatrix_graph<Vertex>::get_neighbours(Vertex vertex) const
 // Operator overload
 /**
  * @brief
- * Overload of the operator <<.
- * @tparam Vertex Type of the vertex.
- * @param os Output stream.
- * @param graph Graph to print.
- * @return std::ostream&, the output stream.
+ * Overload the << operator
+ * @tparam Type of vertex
+ * @param os output stream
+ * @param graph graph to print
+ * @return std::ostream& output stream
  * @complexity O(n^2)
  */
-template <class T>
-std::ostream &operator<<(std::ostream &os, const UMatrix_graph<T> &graph)
+template <class ostream>
+std::ostream &operator<<(std::ostream &os,
+                         const std::shared_ptr<UMatrix_graph<ostream>> &graph)
 {
-    os << "---- Graph: ----" << std::endl;
-    os << "Vertexes: " << std::endl;
+    os << "Graph size: " << graph->get_size() << std::endl
+       << std::endl;
 
-    for (size_t i{}; i < graph.get_next(); ++i)
-        os << graph.vertexes[i] << " ";
+    os << "Adjacent Matrix: " << std::endl;
+
+    for (size_t i{}; i < graph->get_next(); ++i)
+        os << graph->vertexes[i] << " ";
 
     os << std::endl
        << std::endl;
 
     os << "Edges: " << std::endl;
 
-    for (size_t i{}; i < graph.get_next(); ++i)
+    for (size_t i{}; i < graph->get_next(); ++i)
     {
-        for (size_t j{}; j < graph.get_next(); ++j)
-            os << graph.edges[i][j] << " ";
+        for (size_t j{}; j < graph->get_next(); ++j)
+            os << graph->edges[i][j] << " ";
+
+        os << std::endl;
+    }
+
+    os << std::endl
+       << "Adjacent list: " << std::endl;
+
+    for (size_t i{}; i < graph->size; ++i)
+    {
+        os << graph->vertexes[i] << " -> ";
+
+        for (size_t j{}; j < graph->size; ++j)
+            if (graph->edges[i][j])
+                os << graph->vertexes[j] << " ";
 
         os << std::endl;
     }
@@ -144,128 +163,254 @@ std::ostream &operator<<(std::ostream &os, const UMatrix_graph<T> &graph)
 // Private Functions
 /**
  * @brief
- * Get the index of a vertex in the vertexes vector.
- * @tparam Vertex Type of the vertex.
- * @param v Vertex to search.
- * @return int index of the vertex.
+ * Gets the index of a vertex in the vertexes vector.
+ * @tparam Vertex Type of the vertex
+ * @param vertex Vertex to search
+ * @return Vertex index of the vertex
  * @complexity O(n)
  */
 template <class Vertex>
-int UMatrix_graph<Vertex>::index_of(Vertex v) const
+Vertex UMatrix_graph<Vertex>::index_of(Vertex vertex) const
 {
     for (size_t i{}; i < size; ++i)
-        if (vertexes[i] == v)
+        if (vertexes[i] == vertex)
             return i;
 
     return -1;
 }
 
-// Public Functions
 /**
  * @brief
- * Adds an edge to the graph.
- * @tparam Vertex
- * @param from_vertex
- * @param to_vertex
- * @complexity O(1)
- */
-template <class Vertex>
-void UMatrix_graph<Vertex>::add_edge(Vertex from_vertex,
-                                     Vertex to_vertex)
-{
-    int from_p = index_of(from_vertex);
-    if (from_p == -1)
-    {
-        if (get_next() == get_size())
-            throw std::out_of_range("Graph is full");
-
-        vertexes[++next] = from_vertex;
-        from_p = next - 1;
-    }
-
-    int to_p = index_of(to_vertex);
-    if (to_p == -1)
-    {
-        if (get_next() == get_size())
-            throw std::out_of_range("Graph is full");
-
-        vertexes[++next] = to_vertex;
-        to_p = next - 1;
-    }
-
-    edges[from_p][to_p] = true;
-    if (!get_direction())
-        edges[to_p][from_p] = true;
-}
-
-/**
- * @brief
- * Checks if a vertex is in the graph.
- * @tparam Vertex Type of the vertex.
- * @param v       Vertex to search.
- * @return true, if the vertex is in the graph.
- * @return false, if the vertex is not in the graph.
+ * Checks if a vertex is in the graph
+ * @tparam Vertex Type of the vertex
+ * @param vertex1 Vertex to search
+ * @param vertex2 Vertex to search
+ * @return true if the vertex is in the graph
+ * @return false if the vertex is not in the graph
  * @complexity O(n)
  */
 template <class Vertex>
-bool UMatrix_graph<Vertex>::contains_vertex(Vertex v) const
+bool UMatrix_graph<Vertex>::is_edge(Vertex vertex1, Vertex vertex2) const
 {
-    return index_of(v) != -1;
+    return edges[vertex1][vertex2];
 }
 
 /**
  * @brief
- * Checks if an edge is in the graph.
- * @tparam Vertex Type of the vertex.
- * @param start  Start vertex of the edge.
- * @param graph End vertex of the edge.
- * @return true, if the edge is in the graph.
- * @return false, if the edge is not in the graph.
+ * Checks if a vertex is in the graph
+ * @tparam Vertex Type of the vertex
+ * @param vertex Vertex to search
+ * @return true if the vertex is in the graph
+ * @return false if the vertex is not in the graph
+ * @complexity O(n)
+ */
+template <class Vertex>
+bool UMatrix_graph<Vertex>::is_vertex(Vertex vertex) const
+{
+    return index_of(vertex) != -1;
+}
+
+// Public Functions
+/**
+ * @brief
+ * Loads an unweighted matrix graph from a file.
+ * @tparam Vertex Type of the vertex
+ * @param graph_size Size of the graph
+ * @param file File to load the graph from.
+ * @complexity O(n^2)
+ */
+template <class Vertex>
+void UMatrix_graph<Vertex>::load_graph(int graph_size, std::fstream &input_file)
+{
+    int from, to;
+
+    while (true)
+    {
+        input_file >> from >> to;
+
+        if (!from && !to)
+            break;
+
+        add_edge(from, to);
+    }
+}
+
+/**
+ * @brief
+ * Add a vertex to the graph
+ * @tparam Vertex Type of the vertex
+ * @param from_vertex Vertex to add
+ * @param to_vertex Vertex to add
  * @complexity O(1)
  */
 template <class Vertex>
-std::set<Vertex> UMatrix_graph<Vertex>::dfs(const Vertex &start,
-                                            const std::unique_ptr<U_Graph<Vertex>> graph) const
+void UMatrix_graph<Vertex>::add_edge(Vertex from_vertex, Vertex to_vertex)
+{
+    if (!is_vertex(from_vertex))
+        add_vertex(from_vertex);
 
+    if (!is_vertex(to_vertex))
+        add_vertex(to_vertex);
+
+    int index1 = index_of(from_vertex), index2 = index_of(to_vertex);
+    edges[index1][index2] = true;
+
+    if (!direction)
+        edges[index2][index1] = true;
+}
+
+/**
+ * @brief
+ * Add a vertex to the graph
+ * @tparam Vertex Type of the vertex
+ * @param from_vertex Vertex to add
+ * @param to_vertex Vertex to add
+ * @complexity O(1)
+ */
+template <class Vertex>
+void UMatrix_graph<Vertex>::remove_edge(Vertex from_vertex, Vertex to_vertex)
+{
+    if (!is_vertex(from_vertex) || !is_vertex(to_vertex))
+        throw std::invalid_argument("Vertex not found");
+
+    if (!is_edge(from_vertex, to_vertex))
+        throw std::invalid_argument("Edge does not exist");
+
+    edges[from_vertex][to_vertex] = false;
+
+    if (!direction)
+        edges[to_vertex][from_vertex] = false;
+}
+
+/**
+ * @brief
+ * Add a vertex to the graph
+ * @tparam Vertex Type of the vertex
+ * @param vertex Vertex to add
+ * @complexity O(1)
+ */
+template <class Vertex>
+void UMatrix_graph<Vertex>::add_vertex(Vertex vertex)
+{
+    if (is_vertex(vertex))
+        throw std::invalid_argument("Vertex already in the graph");
+
+    if (next == size)
+        throw std::invalid_argument("Graph is full");
+
+    vertexes[next] = vertex;
+    ++next;
+}
+
+/**
+ * @brief
+ * Remove a vertex from the graph
+ * @tparam Vertex Type of the vertex
+ * @param vertex Vertex to remove
+ * @complexity O(n^2)
+ */
+template <class Vertex>
+void UMatrix_graph<Vertex>::remove_vertex(Vertex vertex)
+{
+    if (!is_vertex(vertex))
+        throw std::invalid_argument("Vertex not found");
+
+    for (size_t i{}; i < size; ++i)
+    {
+        edges[index_of(vertex)][i] = false;
+        edges[i][index_of(vertex)] = false;
+    }
+
+    for (size_t i{index_of(vertex)}; i < size - 1; ++i)
+        vertexes[i] = vertexes[i + 1];
+
+    --next;
+}
+
+/**
+ * @brief
+ * Checks if a vertex is in the graph
+ * @tparam Vertex Type of the vertex
+ * @param vertex Vertex to search
+ * @return true if the vertex is in the graph
+ * @return false if the vertex is not in the graph
+ * @complexity O(n)
+ */
+template <class Vertex>
+bool UMatrix_graph<Vertex>::contains_vertex(Vertex vertex) const
+{
+    return is_vertex(vertex);
+}
+
+/**
+ * @brief
+ * Checks if an edge is in the graph
+ * @tparam Vertex Type of the vertex
+ * @param vertex1 Vertex to search
+ * @param vertex2 Vertex to search
+ * @return true if the vertex is in the graph
+ * @return false if the vertex is not in the graph
+ * @complexity O(n)
+ */
+template <class Vertex>
+bool UMatrix_graph<Vertex>::contains_edge(Vertex vertex1, Vertex vertex2) const
+{
+    return is_edge(vertex1, vertex2);
+}
+
+/**
+ * @brief
+ * Depth First Search. Traversal approach in which the traverse begins at
+ * the root node and proceeds through the nodes as far as possible until we
+ * reach the node with no unvisited nearby nodes. Uses a stack data structure.
+ * @tparam Vertex Type of the vertex
+ * @param start Starting vertex
+ * @return std::set<Vertex> Set of the vertexes in the order they were visited
+ * @complexity O(n^2)
+ */
+template <class Vertex>
+std::set<Vertex> UMatrix_graph<Vertex>::dfs(const Vertex &start) const
 {
     std::set<Vertex> visited;
     std::stack<Vertex> stack;
+
     stack.push(start);
 
     while (!stack.empty())
     {
-        Vertex v = stack.top();
+        auto v = stack.top();
         stack.pop();
 
         if (visited.find(v) == visited.end())
         {
             visited.insert(v);
-            std::set<Vertex> neighbours = graph->get_neighbours(v);
+            std::set<Vertex> neighbors = get_neighbours(v);
 
-            for (auto neighbour : neighbours)
-                stack.push(neighbour);
-        }
-    }
+            for (const auto &neightbor : neighbors)
+                stack.push(neightbor);
+
+        } // end of if statement
+    }     // end of while loop
 
     return visited;
 }
 
 /**
  * @brief
- * Checks if an edge is in the graph.
- * @tparam Vertex Type of the vertex.
- * @param start Start vertex of the edge.
- * @param graph End vertex of the edge.
- * @return true, if the edge is in the graph.
- * @return false, if the edge is not in the graph.
- * @complexity O(1)
+ * Breadth First Search. Traversal approach in which we first walk through all
+ * nodes on the same level before moving on to the next level.
+ * Uses a queue data structure.
+ * @tparam Vertex Type of the vertex
+ * @param start Starting vertex
+ * @return std::set<Vertex> Set of the vertexes in the order they were visited
+ * @complexity O(n^2)
  */
 template <class Vertex>
-std::set<Vertex> UMatrix_graph<Vertex>::bfs(const Vertex &start,
-                                            const std::unique_ptr<U_Graph<Vertex>> graph) const
+std::set<Vertex> UMatrix_graph<Vertex>::bfs(const Vertex &start) const
 {
     std::set<Vertex> visited;
     std::queue<Vertex> queue;
+
     queue.push(start);
 
     while (!queue.empty())
@@ -276,12 +421,12 @@ std::set<Vertex> UMatrix_graph<Vertex>::bfs(const Vertex &start,
         if (visited.find(v) == visited.end())
         {
             visited.insert(v);
-            std::set<Vertex> neighbours = graph->get_neighbours(v);
+            std::set<Vertex> neighbors = get_neighbours(v);
 
-            for (auto neighbour : neighbours)
-                queue.push(neighbour);
-        }
-    }
+            for (const auto &neighbor : neighbors)
+                queue.push(neighbor);
+        } // end of if statement
+    }     // end of while loop
 
     return visited;
 }
