@@ -45,7 +45,7 @@ public:
                                     const std::shared_ptr<UMatrix_graph<overload>> &);
 
     // Functions
-    void load_graph(int, std::fstream &);
+    void load_graph(std::fstream &);
     void add_edge(Vertex, Vertex);
     void remove_edge(Vertex, Vertex);
     void add_vertex(Vertex);

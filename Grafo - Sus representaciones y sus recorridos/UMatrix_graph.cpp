@@ -220,7 +220,7 @@ bool UMatrix_graph<Vertex>::is_vertex(Vertex vertex) const
  * @complexity O(n^2)
  */
 template <class Vertex>
-void UMatrix_graph<Vertex>::load_graph(int graph_size, std::fstream &input_file)
+void UMatrix_graph<Vertex>::load_graph(std::fstream &input_file)
 {
     int from, to;
 
