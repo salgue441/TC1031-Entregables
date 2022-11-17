@@ -1,3 +1,14 @@
+/**
+ * @file heap.cpp
+ * @author Carlos Salguero
+ * @brief Implementation of Heap data structures
+ * @version 0.1
+ * @date 2022-11-16
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include "heap.h"
 
 // Private Access Methods

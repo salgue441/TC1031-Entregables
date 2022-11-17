@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  * @author Carlos Salguero
- * @brief
+ * @brief Main file for the program
  * @version 0.1
  * @date 2022-11-16
  *
