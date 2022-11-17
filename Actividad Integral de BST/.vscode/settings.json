@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.fish": "powershell",
+    "ostream": "cpp"
+  }
+}
