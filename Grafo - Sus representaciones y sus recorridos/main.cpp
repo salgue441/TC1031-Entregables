@@ -28,13 +28,29 @@ int main()
     int first_line;
     input_file >> first_line;
 
-    std::shared_ptr<UMatrix_graph<int>> graph =
-        std::make_shared<UMatrix_graph<int>>(first_line);
+    std::shared_ptr<UMatrix_graph<std::string>> graph =
+        std::make_shared<UMatrix_graph<std::string>>(first_line);
 
-    graph->load_graph(first_line, input_file);
-
-    graph->dfs(1);
-    graph->bfs(1);
+    graph->add_edge("A", "B");
+    graph->add_edge("A", "C");
+    graph->add_edge("A", "D");
+    graph->add_edge("A", "E");
+    graph->add_edge("B", "C");
+    graph->add_edge("B", "E");
+    graph->add_edge("C", "D");
+    graph->add_edge("C", "E");
+    graph->add_edge("C", "A");
+    graph->add_edge("D", "A");
+    graph->add_edge("D", "F");
+    graph->add_edge("D", "C");
+    graph->add_edge("D", "B");
+    graph->add_edge("E", "A");
+    graph->add_edge("E", "B");
+    graph->add_edge("E", "C");
+    graph->add_edge("E", "D");
+    graph->add_edge("E", "F");
+    graph->add_edge("F", "D");
+    graph->add_edge("F", "E");
 
     std::cout << graph << std::endl;
 }

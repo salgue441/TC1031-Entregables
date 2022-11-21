@@ -1,6 +1,8 @@
 /**
  * @file heap.h
  * @author Carlos Salguero
+ * @author Sven Chavez
+ * @author Hossue Ceja
  * @brief Declaration of Heap data structure
  * @version 0.1
  * @date 2022-11-16
