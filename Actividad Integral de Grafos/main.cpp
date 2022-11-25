@@ -50,6 +50,8 @@ int main(int argc, char **argv)
         graph.add_edge(port_1, port_2);
     }
 
+    std::cout << graph << std::endl;
+
     int num_queries{};
     input_file >> num_queries;
 
