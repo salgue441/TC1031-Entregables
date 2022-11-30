@@ -1,6 +1,8 @@
 /**
  * @file main.cpp
  * @author Carlos Salguero
+ * @author Sergio Garnica
+ * @author Sven Chavez
  * @brief Main file for the project
  * @version 0.1
  * @date 2022-11-22

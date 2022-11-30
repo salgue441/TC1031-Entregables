@@ -1,6 +1,8 @@
 /**
  * @file UGraph.cpp
  * @author Carlos Salguero
+ * @author Sergio Garnica
+ * @author Sven Chavez
  * @brief implementation of the Unweighted Graph class.
  * @version 0.1
  * @date 2022-11-12

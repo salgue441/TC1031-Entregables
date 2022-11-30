@@ -1,6 +1,8 @@
 /**
  * @file UGraph.h
  * @author Carlos Salguero
+ * @author Sergio Garnica
+ * @author Sven Chavez
  * @brief This file contains the definition of the Unweighted Graph class.
  * @version 0.1
  * @date 2022-11-12
